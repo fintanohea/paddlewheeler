@@ -19,12 +19,13 @@ exports.handler = (event, context, callback) => {
     sanity.fetch(query, params).then(results => {
       const products = results.map(x => {
           const output = {
-            id: x._id,
-            name: x.title,
-            url: `${process.env.URL}/.netlify/functions/getProduct?id=${x._id}`,
-            price: x.defaultProductVariant.price,
-            description: x.blurb.en,
-            body: blocksToHtml({blocks: x.body.en}),
+            id: x._id ? x._id : '',
+            name: x.title ? x.title : '',
+            url: x._id ? `${process.env.URL}/.netlify/functions/getProduct?id=${x._id}` : '',
+            price: x.defaultProductVariant.price ? x.defaultProductVariant.price : '',
+            description: x.blurb ? x.blurb.en : '',
+            body: x.body ? blocksToHtml({blocks: x.body.en}) : '',
+            vendor: x.vendor ? x.vendor._ref : ''
           }
 
           let images = []
@@ -37,15 +38,11 @@ exports.handler = (event, context, callback) => {
             output.images = images
           }
           else {
-            const image = x.defaultProductVariant.images && x.defaultProductVariant.images.length > 0
-            ? x.defaultProductVariant.images[0].asset._ref
-            : null
+            x.defaultProductVariant.images && x.defaultProductVariant.images.length > 0
+              ? output.image = imageUrlBuilder(sanity).image(x.defaultProductVariant.images[0].asset._ref).size(900, 900).fit('fillmax').url()
+              : output.image = '/assets/img/No_image_available.png'
 
-            if (image) {
-              images.push(imageUrlBuilder(sanity).image(image).size(900, 900).fit('fillmax').url())
-            }
-
-            output.images = images
+            output.images = [output.image]
           }
     
           return output;

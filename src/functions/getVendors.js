@@ -22,7 +22,6 @@ exports.handler = (event, context, callback) => {
 
     sanity.fetch(query, params).then(results => {
       const vendors = results.map(x => {
-        console.log(x)
         const output = {
             id: x._id,
             name: x.title

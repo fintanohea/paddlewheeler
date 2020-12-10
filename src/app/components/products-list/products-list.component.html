@@ -33,34 +33,54 @@
       </ul>  
     </div>
     
-
-    <p class="m-4" *ngIf="!loadingProducts">
-      <button class="button refine-search-button" (click)="sidenav.open()">
-        <mat-icon aria-hidden="false" aria-label="filter_list icon">filter_list</mat-icon>
-        <span>Refine Search</span>
-      </button>
-    </p>
-    
-    <main class="catalog" *ngIf="!loadingProducts && !loadingCatagories && !loadingVendors; else loadingBlock">
-        <app-products-list-item
-          class="catalog__product"
-          *ngFor="let product of displayedProducts"
-          [product]="product"
-          (isLoading)="isLoadingFromProduct($event)"
-          (loadedProducts)="loadedProducts($event)">
-            {{ product.name }}
-        </app-products-list-item>
-    </main>
-
-    <div 
-      class="text-center no-products-container" 
-      *ngIf="displayedProducts.length === 0 && !loadingProducts">
-      <img class="mx-auto d-block" src="../../../assets/img/sad_panda.png" alt="sad panda no product">
-      <span>
-        There was no products found
-      </span>
+    <div class="d-flex">
+      <div class="mr-auto p-2">
+        <button class="button refine-search-button" (click)="sidenav.open()">
+          <mat-icon aria-hidden="false" aria-label="filter_list icon">filter_list</mat-icon>
+          <span>Refine Search</span>
+        </button>
+      </div>
+      <div class="p-2" *ngIf="viewType === 'gallery'">
+        <button class="button refine-search-button" (click)="toggleView('table')">
+          <mat-icon aria-hidden="false" aria-label="list icon">list</mat-icon>
+        </button>
+      </div>
+      <div class="p-2" *ngIf="viewType === 'table'">
+        <button class="button refine-search-button" (click)="toggleView('gallery')">
+          <mat-icon aria-hidden="false" aria-label="view_module icon">view_module</mat-icon>
+        </button>
+      </div>
     </div>
-    
+
+    <div *ngIf="!loadingProducts && !loadingCatagories && !loadingVendors; else loadingBlock">
+      <div *ngIf="displayedProducts.length !== 0; else noDataBlock">
+        <app-product-list-table 
+        *ngIf="viewType === 'table'"
+        [(displayedProducts)]='displayedProducts'>
+        </app-product-list-table> 
+        
+        <main class="catalog" *ngIf="viewType === 'gallery'">
+          <app-products-list-item
+              class="catalog__product"
+              *ngFor="let product of displayedProducts"
+              [product]="product"
+              (isLoading)="isLoadingFromProduct($event)"
+              (loadedProducts)="loadedProducts($event)">
+                {{ product.name }}
+            </app-products-list-item>
+        </main>
+      </div>
+      
+      <ng-template #noDataBlock>
+        <div class="text-center no-products-container">
+          <img class="mx-auto d-block" src="../../../assets/img/sad_panda.png" alt="sad panda no product">
+          <span>
+            There was no products found
+          </span>
+        </div>
+      </ng-template>
+    </div>
+
     <ng-template #loadingBlock>
       <main class="catalog catalog--loading">
         <span class="catalog__loading">
