@@ -23,6 +23,7 @@ export class ProductsListComponent implements OnInit {
   selectedVendor: string = 'all'
   @ViewChild('sidenav') sidenav: MatSidenav;
   category: string
+  viewType: string = 'gallery'
 
   constructor(
     private productsService: ProductsService,
@@ -108,5 +109,9 @@ export class ProductsListComponent implements OnInit {
 
   closeSideNav() {
     this.sidenav.close();
+  }
+
+  toggleView(selectedViewType: string) {
+    this.viewType = selectedViewType
   }
 }

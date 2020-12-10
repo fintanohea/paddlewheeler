@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ProductListTableComponent } from './components/product-list-table/product-list-table.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HomepageComponent,
     ProductPageComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProductListTableComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatSelectModule,
     MatSidenavModule,
     MatIconModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
