@@ -28,13 +28,9 @@ exports.handler = (event, context, callback) => {
           vendor: x.vendor ? x.vendor._ref : ''
         }
 
-        const image = x.defaultProductVariant.images && x.defaultProductVariant.images.length > 0
-        ? x.defaultProductVariant.images[0].asset._ref
-        : null;
-
-        if (image) {
-            output.image = imageUrlBuilder(sanity).image(image).size(300, 300).fit('fillmax').url();
-        }
+        x.defaultProductVariant.images && x.defaultProductVariant.images.length > 0
+          ? output.image = imageUrlBuilder(sanity).image(x.defaultProductVariant.images[0].asset._ref).size(300, 300).fit('fillmax').url()
+          : output.image = '/assets/img/No_image_available.png'
 
         return output
       })
