@@ -45,7 +45,7 @@ let fixture: ComponentFixture<AppComponent>;
     expect(compiled.querySelector('app-footer')).toBeTruthy();
   });
 
-  it(`should have as title 'sauna-king'`, () => {
-    expect(component.title).toEqual('sauna-king');
+  it(`should have as title 'paddlewheeler'`, () => {
+    expect(component.title).toEqual('paddlewheeler');
   });
 });

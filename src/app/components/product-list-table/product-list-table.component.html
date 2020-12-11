@@ -1,26 +1,34 @@
 <table mat-table [dataSource]="displayedProducts" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> ${{element.price}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element"> ${{element.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action-btns">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button class="m-2 button button--buy snipcart-add-item default-button"
+          [attr.data-item-url]="element.url"
+          [attr.data-item-id]="element.id"
+          [attr.data-item-price]="element.price"
+          [attr.data-item-description]="element.description"
+          [attr.data-item-image]="element.image"
+          [attr.data-item-name]="element.name">
+          Add to cart
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

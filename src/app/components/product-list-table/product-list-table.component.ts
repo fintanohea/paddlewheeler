@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 })
 export class ProductListTableComponent implements OnInit {
   @Input() displayedProducts: Product[]
-  displayedColumns: string[] = ['name', 'description', 'price']
+  displayedColumns: string[] = ['name', 'description', 'price', 'action-btns']
 
   constructor(private productsService: ProductsService) { }
 
