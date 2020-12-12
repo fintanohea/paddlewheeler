@@ -23,7 +23,7 @@ export class ProductsListComponent implements OnInit {
   selectedVendor: string = 'all'
   @ViewChild('sidenav') sidenav: MatSidenav;
   category: string
-  viewType: string = 'gallery'
+  viewType: string = 'table'
 
   constructor(
     private productsService: ProductsService,
