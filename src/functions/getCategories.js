@@ -11,7 +11,7 @@ const sanity = sanityClient({
 
 exports.handler = (event, context, callback) => {
 
-    const query = '*[_type == "category"]'
+    const query = '*[_type == "category"] | order(order asc)'
     const params = {}
 
     sanity.fetch(query, params).then(results => {
