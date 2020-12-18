@@ -17,18 +17,18 @@
   <mat-sidenav-content>
     <div class="col-md-12 scrollmenu">
       <ul *ngIf="!loadingCatagories" class="categories-nav-menu list-group flex-md-row justify-content-center">
+        <li
+          [ngClass]="{'active': category !== undefined && category.slug == c.slug}" 
+          class="p-4 list-group-item"
+          *ngFor="let c of categories"
+          routerLink="/store/{{c.slug}}">
+          {{ c.name }}
+        </li>
         <li 
-          [ngClass]="{'active': !category}"
+          [ngClass]="{'active': category === undefined}"
           class="p-4 list-group-item"
           routerLink="/store">
           All
-        </li>
-        <li
-          [ngClass]="{'active': category == c.id}" 
-          class="p-4 list-group-item"
-          *ngFor="let c of categories"
-          routerLink="/store/{{c.id}}">
-          {{ c.name }}
         </li>
       </ul>  
     </div>
@@ -64,8 +64,8 @@
               class="catalog__product"
               *ngFor="let product of displayedProducts"
               [product]="product"
-              (isLoading)="isLoadingFromProduct($event)"
-              (loadedProducts)="loadedProducts($event)">
+              (isLoading)="isLoadingProducts($event)"
+              (loadedProducts)="setLoadedProducts($event)">
                 {{ product.name }}
             </app-products-list-item>
         </main>

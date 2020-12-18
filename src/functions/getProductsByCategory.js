@@ -11,27 +11,31 @@ const sanity = sanityClient({
 })
 
 exports.handler = (event, context, callback) => {
-
     const category = event.queryStringParameters.category
-    const query = '*[_type == "product" && categories[]._ref == $category]'
-    const params = {category: category}
+    let query
+    let params = {}
+
+    category !== 'undefined' 
+      ? (query = '*[_type == "product" && categories[]._ref == $category]',
+        params = {category: category})
+      : query = '*[_type == "product"]'
 
     sanity.fetch(query, params).then(results => {
       const products = results.map(x => {
         const output = {
           id: x._id ? x._id : '',
           name: x.title ? x.title : '',
+          slug: x.slug.current ? x.slug.current : '',
           url: x._id ? `${process.env.URL}/.netlify/functions/getProduct?id=${x._id}` : '',
-          price: x.defaultProductVariant.price ? x.defaultProductVariant.price : '',
-          description: x.blurb ? x.blurb.en : '',
+          price: x.price ? x.price : '',
+          description: x.description ? x.description : '',
           body: x.body ? blocksToHtml({blocks: x.body.en}) : '',
-          vendor: x.vendor ? x.vendor._ref : ''
         }
-
-        x.defaultProductVariant.images && x.defaultProductVariant.images.length > 0
-          ? output.image = imageUrlBuilder(sanity).image(x.defaultProductVariant.images[0].asset._ref).size(300, 300).fit('fillmax').url()
+  
+        x.images && x.images.length > 0
+          ? output.image = imageUrlBuilder(sanity).image(x.images[0].asset._ref).size(300, 300).fit('fillmax').url()
           : output.image = '/assets/img/No_image_available.png'
-
+  
         return output
       })
 

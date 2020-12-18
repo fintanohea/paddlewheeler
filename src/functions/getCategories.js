@@ -18,6 +18,7 @@ exports.handler = (event, context, callback) => {
       const categories = results.map(x => {
         const output = {
             id: x._id,
+            slug: x.slug.current,
             name: x.title
         }
     
