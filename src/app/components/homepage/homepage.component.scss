@@ -78,7 +78,7 @@
     }
 
     .intro-section {
-        background: url(/assets/img/sauna2.jpg);
+        background: url(/assets/img/paddlewheeler5.png);
     }
 
     .best-sellers-section {
@@ -86,11 +86,11 @@
     }
 
     .steamcube-section {
-        background: url(/assets/img/Finland_view_trees.jpg);
+        background: url(/assets/img/patio.jpg);
     }
-
+    
     .custom-made-section {
-        background: url(/assets/img/hoshi-sauna-3.jpg);
+        background: url(/assets/img/bar.jpg);
     }
 
     .text-div {
@@ -115,13 +115,14 @@
         .title {
             font-family: fuji-bold;
             color: $black;
-            font-size: 6vw;
+            font-size: 3rem;
             color: $white;
+            padding-bottom: 30px;
         }
 
         .content {
             font-family: neueMontreal-light;
-            font-size: 2vh;
+            font-size: 1.5rem;
             color: $white;
             font-weight: bold;
         }
@@ -141,6 +142,14 @@
 
         &.right {
             margin-right: 0px !important;
+        }
+
+        .title {
+            font-size: 2rem !important;
+        }
+
+        .content {
+            font-size: 1rem !important;
         }
     }
  }
