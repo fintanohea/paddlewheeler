@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,7 +42,7 @@ import { ProductListTableComponent } from './components/product-list-table/produ
     ProductPageComponent,
     FooterComponent,
     NotFoundComponent,
-    ProductListTableComponent
+    ProductListTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +63,7 @@ import { ProductListTableComponent } from './components/product-list-table/produ
     MatSidenavModule,
     MatIconModule,
     MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

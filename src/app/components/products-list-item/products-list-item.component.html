@@ -12,6 +12,7 @@
   <figcaption>
     <h3 class="product__name">{{ product.name }}</h3>
     <span class="product__price">${{ product.price }}</span>
+    <button mat-raised-button (click)="openDialog()">Pick one</button>
     <!-- <button class="button button--buy snipcart-add-item"
       [attr.data-item-url]="product.url"
       [attr.data-item-id]="product.id"

@@ -1,5 +1,6 @@
-
 const sanityClient = require('@sanity/client')
+const imageUrlBuilder = require('@sanity/image-url')
+const blocksToHtml = require('@sanity/block-content-to-html')
 require('dotenv').config({path:__dirname+'/./../.env'})
 
 const sanity = sanityClient({
@@ -10,19 +11,14 @@ const sanity = sanityClient({
 })
 
 exports.handler = (event, context, callback) => {
+    const sides = event.queryStringParameters.sides
 
-    const query = '*[_type == "category"] | order(order asc)'
-    const params = {}
+    const query = '*[_type == "side" && _id in [$sides]]'
+    const params = {sides: sides}
 
     sanity.fetch(query, params).then(results => {
-      const categories = results.map(x => {
-        const output = {
-            id: x._id,
-            slug: x.slug.current,
-            name: x.title
-        }
-    
-        return output
+      const sides = results.map(x => {    
+          return x;
       })
 
       callback(null, {
@@ -30,7 +26,7 @@ exports.handler = (event, context, callback) => {
           headers: {
           'Content-Type': 'application/json',
           },
-          body: JSON.stringify(categories),
+          body: JSON.stringify(sides),
       })
   })
 }
