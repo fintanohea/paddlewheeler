@@ -1,3 +1,5 @@
+import { Side } from './Side'
+
 export interface Product {
   id: string;
   name: string;
@@ -9,5 +11,5 @@ export interface Product {
   description?: string;
   body?: string;
   vendor?: string;
-  modifierCategory?: string[];
+  sides?: Side[];
 }

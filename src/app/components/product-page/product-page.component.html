@@ -28,6 +28,20 @@
             <div class="product-price font-weight-bold mb-2">
                 ${{ product.price }}
             </div>
+            <mat-form-field appearance="fill" *ngIf="product.sides">
+                <mat-label>Side</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let side of product.sides" [value]="side._id">
+                        {{side.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <label>Frame color</label>
+                <select id="frame_color">
+                <option value="Black">Black</option>
+                <option value="Brown">Brown</option>
+                <option value="Gold">Gold</option>
+                </select>
             <div class="product-action-buttons mb-4">
                 <button class="button button--buy snipcart-add-item default-button small"
                         [attr.data-item-url]="product.url"
@@ -35,12 +49,14 @@
                         [attr.data-item-price]="product.price"
                         [attr.data-item-description]="product.description"
                         [attr.data-item-image]="product.image"
-                        [attr.data-item-name]="product.name">
+                        [attr.data-item-name]="product.name"
+                        [attr.data-item-custom1-name]="sidesLabel"
+                        [attr.data-item-custom1-options]="customSides">
                         Add to cart
                     </button>
             </div>
             <div class="product-description"
-                [innerHTML]=product.body>
+                [innerHTML]="product.body">
             </div>
         </div>
     </div>

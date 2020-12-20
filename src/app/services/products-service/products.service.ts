@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../../models/Product';
 import { Category } from '../../models/Category';
 import { Vendor } from '../../models/Vendor';
+import { Side } from '../../models/Side';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -49,6 +50,17 @@ export class ProductsService {
     return this.http.get<Category[]>('/.netlify/functions/getCategories', {
       headers: {
         'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  getSides(sides: string[]): Observable<Side[]> {
+    return this.http.get<Side[]>('/.netlify/functions/getSides', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      params: {
+        'sides': sides
       }
     });
   }
