@@ -1,4 +1,5 @@
 import { Side } from './Side'
+import { Modifier } from './Modifier'
 
 export interface Product {
   id: string;
@@ -12,4 +13,6 @@ export interface Product {
   body?: string;
   vendor?: string;
   sides?: Side[];
+  selectedSide?: Side;
+  modifiers?: Modifier[];
 }

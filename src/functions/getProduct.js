@@ -13,7 +13,7 @@ const sanity = sanityClient({
 exports.handler = (event, context, callback) => {
 
     const productId = event.queryStringParameters.id
-    const query = '*[_type == "product" && _id == $id] {  ..., sides[]->{_id, title, price} }'
+    const query = '*[_type == "product" && _id == $id] {  ..., sides[]->{_id, title, price}, modifiers[]->{_id, title, price} }'
     
     const params = {id: productId}
 
@@ -27,7 +27,8 @@ exports.handler = (event, context, callback) => {
             price: x.price ? x.price : '',
             description: x.description ? x.description : '',
             body: x.body ? blocksToHtml({blocks: x.body.en}) : '',
-            sides: x.sides ? x.sides : null
+            sides: x.sides ? x.sides : null,
+            modifiers: x.modifiers ? x.modifiers : null
           }
 
           let images = []
